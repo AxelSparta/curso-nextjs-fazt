@@ -9,6 +9,9 @@ export default function Navbar() {
 			<Link href="/about" className="text-xl font-bold">
 				About
 			</Link>
+			<Link href="/peticiones" className="text-xl font-bold">
+				Peticiones
+			</Link>
 		</nav>
 	);
 }
