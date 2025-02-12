@@ -9,9 +9,9 @@ export default async function Peticiones () {
     <div>
       <h1>Peticiones</h1>
       {posts.map(post => (
-        <div className="grid grid-cols-3 gap-4 " key={post.id}>
-          <h2 className="text-xl">{post.title}</h2>
-          <p className="text-sm">{post.body}</p>
+        <div className='grid grid-cols-3 gap-4' key={post.id}>
+          <h2 className='text-xl'>{post.title}</h2>
+          <p className='text-sm'>{post.body}</p>
         </div>
       ))}
     </div>
