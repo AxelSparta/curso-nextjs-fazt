@@ -3,6 +3,8 @@ import PostCard from "@/components/PostCard"
 const getPosts = async () => {
   const response = await fetch('https://jsonplaceholder.typicode.com/posts')
   const data = await response.json()
+  // Simulate a network delay
+  await new Promise(r => setTimeout(r, 2000))
   return data
 }
 export default async function PeticionesPage () {
