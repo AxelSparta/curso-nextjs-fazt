@@ -1,70 +1,26 @@
-import Image from "next/image";
+'use client'
 
-export default function About() {
+import { useRouter, useParams } from 'next/navigation'
+
+export default function About () {
+  const router = useRouter()
+  // otra forma de acceder a los params const params = useParams()
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-4xl font-bold">About</h1>
-        <p className="text-xl">
-          This is a simple static site generated using{" "}
-          <a
-            className="text-blue-600 underline"
-            href="https://nextjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Next.js
-          </a>
-          .
+    <div className='grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
+      <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start'>
+        <h1 className='text-4xl font-bold'>About</h1>
+        <p className='text-xl'>
+          This is a simple static site generated using <button></button>
         </p>
+        <button
+          onClick={() => {
+            alert('Executing code before redirect!')
+            router.push('/')
+          }}
+        >
+          Go back
+        </button>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
-  );
+  )
 }
