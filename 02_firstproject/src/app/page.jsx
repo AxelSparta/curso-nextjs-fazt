@@ -8,7 +8,6 @@ const getUsers = async () => {
 
 export default async function Home () {
   const users = await getUsers()
-  console.log(users)
   return (
     <>
       <Users users={users} />
