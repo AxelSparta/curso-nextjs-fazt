@@ -6,3 +6,13 @@ body {
   @apply bg-slate-950;
   @apply text-slate-100;
 }
+
+.tasks-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-items: start;
+  margin: 0 auto;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+

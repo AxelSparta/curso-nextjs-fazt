@@ -1,15 +1,28 @@
 import NewTodoCard from '@/components/NewTodoCard'
-import TodoCard from '@/components/TodoCard'
+import TaskCard from '@/components/TaskCard'
 
-export default function Home () {
+const getTasks = async () => {
+  try {
+    const res = await fetch('http://localhost:3000/api/tasks')
+    return await res.json()
+  } catch (error) {
+    return { error: true, message: error.message }
+  }
+}
+
+export default async function Home () {
+  const tasks = await getTasks()
   return (
     <>
       <main className='container mx-auto'>
         <h1>Todo aplication</h1>
-        <div className='flex gap-4 flex-wrap justify-center lg:justify-normal'>
+        <div className='tasks-container'>
           <NewTodoCard />
-          <TodoCard />
+          { tasks.error && <p>{tasks.message}</p> }
+          { tasks.map(task => <TaskCard key={task.id} task={task} />) }
         </div>
+        
+        <div className='tasks-container flex gap-4 flex-wrap justify-center'></div>
       </main>
     </>
   )
