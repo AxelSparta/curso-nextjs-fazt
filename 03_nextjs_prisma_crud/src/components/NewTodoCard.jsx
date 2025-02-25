@@ -1,6 +1,10 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
+import { toast } from 'nextjs-toast-notify'
+
 export default function NewTodoCard ({ updateTasks }) {
+  const router = useRouter()
   const handleSubmit = async e => {
     try {
       e.preventDefault()
@@ -15,16 +19,29 @@ export default function NewTodoCard ({ updateTasks }) {
           description: e.target.description.value
         })
       })
-      const data = await res.json()
-      
+      await res.json()
+      toast.success('¡Tarea creada con éxito!', {
+        duration: 2000,
+        progress: true,
+        position: 'bottom-center',
+        transition: 'bounceIn',
+      })
+      router.refresh()
     } catch (error) {
-      console.log(error)
+      toast.error('¡Algo ha ido mal!', {
+        duration: 2000,
+        progress: true,
+        position: 'bottom-center',
+        transition: 'bounceIn',
+      })
+    } finally{
+      e.target.reset()
     }
   }
 
   return (
     <form
-      className='border rounded-md p-4 max-w-96 flex flex-col'
+      className='border rounded-md p-4 max-w-96 flex flex-col mx-auto'
       onSubmit={handleSubmit}
     >
       <legend className='text-xl font-bold text-center mb-4'>
