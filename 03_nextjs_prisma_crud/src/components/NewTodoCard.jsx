@@ -16,6 +16,7 @@ export default function NewTodoCard ({ updateTasks }) {
         })
       })
       const data = await res.json()
+      console.log(data)
       
     } catch (error) {
       console.log(error)
