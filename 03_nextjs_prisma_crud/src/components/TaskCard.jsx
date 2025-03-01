@@ -33,6 +33,10 @@ export default function TaskCard ({ task }) {
       router.refresh()
     }
   }
+
+  const handleEdit = () => {
+    router.push(`/edit/${task.id}`)
+  }
   return (
     <div className='border rounded-md p-4 max-w-96 flex flex-col justify-between mx-auto'>
       <div className='mb-4'>
@@ -45,7 +49,10 @@ export default function TaskCard ({ task }) {
         <button className='border rounded-md mx-auto p-2 bg-slate-100 text-slate-950 border-slate-100 font-semibold hover:text-slate-100 hover:bg-slate-950 transition-all'>
           Completar
         </button>
-        <button className='border rounded-md mx-auto p-2 bg-slate-100 text-slate-950 border-slate-100 font-semibold hover:text-slate-100 hover:bg-slate-950 transition-all'>
+        <button
+          className='border rounded-md mx-auto p-2 bg-slate-100 text-slate-950 border-slate-100 font-semibold hover:text-slate-100 hover:bg-slate-950 transition-all'
+          onClick={handleEdit}
+        >
           Editar
         </button>
         <button
