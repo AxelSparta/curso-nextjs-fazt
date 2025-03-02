@@ -1,9 +1,16 @@
 import TaskCard from '@/components/TaskCard'
 
 const getTasks = async () => {
-  const tasks = await fetch('http://localhost:3000/api/tasks')
-  return await tasks.json()
+  const data = await fetch('http://localhost:3000/api/tasks')
+  return await data.json()
 }
-export default function TasksContainer () {
-  return <>'asda'</>
+export default async function TasksContainer () {
+  const tasks = await getTasks()
+  return (
+    <>
+      {tasks.map(task => (
+        <TaskCard key={task.id} task={task} />
+      ))}
+    </>
+  )
 }
