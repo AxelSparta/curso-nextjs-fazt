@@ -5,7 +5,6 @@ export default async function HomePage () {
   return (
     <>
       <main className='container mx-auto'>
-        <h1>Todo aplication</h1>
         <div className='tasks-container'>
           <NewTodoCard />
           <TasksContainer />
