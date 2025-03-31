@@ -1,4 +1,9 @@
+// lib/prisma.ts
 import { PrismaClient } from '@prisma/client'
 
-// para poder conectarnos a la base de datos
-export const prisma = new PrismaClient()
+const globalForPrisma = global
+
+// nos evita crear multiples instancias de prisma, si ya tenemos una instancia se utiliza la misma
+export const prisma = globalForPrisma.prisma || new PrismaClient()
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
