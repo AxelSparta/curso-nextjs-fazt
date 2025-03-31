@@ -19,7 +19,7 @@ export default async function Home () {
         <div className='tasks-container'>
           <NewTodoCard />
           { tasks.error && <p>{tasks.message}</p> }
-          { tasks.map(task => <TaskCard key={task.id} task={task} />) }
+          { !tasks.error && tasks.map(task => <TaskCard key={task.id} task={task} />) }
         </div>
         
         <div className='tasks-container flex gap-4 flex-wrap justify-center'></div>
