@@ -3,6 +3,9 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { v4 as uuidV4 } from "uuid";
+import { useRouter } from 'next/navigation'
+
 
 import { toast } from 'sonner'
 
@@ -17,51 +20,87 @@ import {
   FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
 const FormSchema = z.object({
-  username: z.string().min(2, {
-    message: 'Username must be at least 2 characters.'
+  title: z
+    .string()
+    .min(2, {
+      message: 'El título debe tener como mínimo 2 caracteres.'
+    })
+    .max(200, {
+      message: 'El título no puede tener más de 200 caracteres.'
+    }),
+  description: z.string().min(10, {
+    message: 'La descripción debe tener mínimo 10 caracteres.'
   })
 })
 
 export default function NewNotePage () {
+
+  const router = useRouter()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      username: ''
+      title: '',
+      description: ''
     }
   })
 
   function onSubmit (data: z.infer<typeof FormSchema>) {
-    toast('Event has been created', {
-      description: 'Sunday, December 03, 2023 at 9:00 AM',
-      action: {
-        label: 'Undo',
-        onClick: () => console.log('Undo')
-      }
-    })
+    const { title, description } = data
+    const newNote = {
+      id: uuidV4(),
+      title,
+      description
+    }
+    if (localStorage.getItem('notes')) {
+      const notes = JSON.parse(localStorage.getItem('notes') as string)
+      notes.push(newNote)
+      localStorage.setItem('notes', JSON.stringify(notes))
+    } else {
+      const notes = [newNote]
+      localStorage.setItem('notes', JSON.stringify(notes))
+    }
+
+    router.push('/')
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='max-w-md mx-auto'>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className='max-w-md mx-auto flex flex-col gap-4'
+      >
         <FormField
           control={form.control}
-          name='username'
+          name='title'
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel className='font-semibold'>Título</FormLabel>
               <FormControl>
-                <Input placeholder='shadcn' {...field} />
+                <Input placeholder='Título de la nota' {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type='submit'>Submit</Button>
+        <FormField
+          control={form.control}
+          name='description'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className='font-semibold'>Descripción</FormLabel>
+              <FormControl>
+                <Textarea placeholder='Título de la nota' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className='w-full'>
+          <Button className='block mx-auto invert' type='submit'>Submit</Button>
+        </div>
       </form>
     </Form>
   )
