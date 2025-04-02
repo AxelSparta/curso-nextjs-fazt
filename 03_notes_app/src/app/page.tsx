@@ -20,12 +20,10 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
-import { useRouter } from 'next/navigation'
 import { DialogClose } from '@radix-ui/react-dialog'
 import Link from 'next/link'
 
 export default function Home () {
-  const router = useRouter()
   const [notes, setNotes] = useState<Note[]>([])
   const getNotes = () => {
     const notes = JSON.parse(localStorage.getItem('notes') as string)
