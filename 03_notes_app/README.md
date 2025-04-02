@@ -1,36 +1,22 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRUD de Notas con Next.js y LocalStorage
+Este proyecto es una aplicación web de gestión de notas que permite crear, leer, actualizar y eliminar notas de manera sencilla. Está construido con Next.js y utiliza LocalStorage como almacenamiento de datos en el navegador.
 
-## Getting Started
+## Tecnologías y librerías utilizadas:
+- Next.js: Framework de React para la creación de aplicaciones web.
 
-First, run the development server:
+- TypeScript: Añade tipado estático para mejorar la mantenibilidad y la seguridad del código.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Tailwind CSS: Framework de estilos utilitario para un diseño moderno y responsivo.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Zod: Biblioteca para validación de datos, utilizada en la validación de formularios y esquemas.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- React Hook Form: Manejo de formularios eficiente y optimizado para mejorar la experiencia de usuario.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Shadcn: Conjunto de componentes UI estilizados que facilitan la construcción de una interfaz elegante.
 
-## Learn More
+- React Icons: Librería de iconos para mejorar la apariencia visual de la aplicación.
 
-To learn more about Next.js, take a look at the following resources:
+## Aprendizaje
+Durante el desarrollo de este proyecto, he aprendido y aplicado conceptos clave de estas tecnologías, comprendiendo cómo combinarlas de manera efectiva. Desde la gestión del estado y la validación de datos con Zod y React Hook Form, hasta el uso de Tailwind y Shadcn para diseñar una interfaz moderna y accesible. Además, he integrado Next.js con LocalStorage para persistir datos sin necesidad de un backend.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este proyecto ha sido un gran ejercicio práctico para afianzar mis conocimientos en desarrollo web moderno con tecnologías actuales. 🚀

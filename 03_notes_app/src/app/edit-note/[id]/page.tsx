@@ -1,14 +1,10 @@
 'use client'
 
+import { useParams, useRouter } from 'next/navigation'
+import { Button } from '@/components/ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { v4 as uuidV4 } from "uuid";
-import { useRouter } from 'next/navigation'
-
-
-
-import { Button } from '@/components/ui/button'
 import {
   Form,
   FormControl,
@@ -19,6 +15,8 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { useEffect, useState } from 'react'
+import { Note } from '@/utils/types'
 
 const FormSchema = z.object({
   title: z
@@ -34,27 +32,43 @@ const FormSchema = z.object({
   })
 })
 
-export default function NewNotePage () {
-
+export default function EditNotePage () {
   const router = useRouter()
+  const [note, setNote] = useState<Note>({
+    title: '',
+    description: '',
+    id: ''
+  })
+
+  const params = useParams()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: '',
-      description: ''
+      title: note.title,
+      description: note.description
     }
   })
+  useEffect(() => {
+    const notes = JSON.parse(localStorage.getItem('notes') as string)
+    const noteToEdit = notes.find((note: Note) => note.id === params.id)
+    setNote(noteToEdit)
+    form.setValue('title', noteToEdit.title)
+    form.setValue('description', noteToEdit.description)
+  }, [])
 
-  function onSubmit (data: z.infer<typeof FormSchema>) {
+  const handleEditForm = (data: z.infer<typeof FormSchema>) => {
     const { title, description } = data
+
     const newNote = {
-      id: uuidV4(),
+      id: note.id,
       title,
       description
     }
+
     if (localStorage.getItem('notes')) {
       const notes = JSON.parse(localStorage.getItem('notes') as string)
-      notes.push(newNote)
+      const index = notes.findIndex((note: Note) => note.id === note.id)
+      notes[index] = newNote
       localStorage.setItem('notes', JSON.stringify(notes))
     } else {
       const notes = [newNote]
@@ -67,8 +81,8 @@ export default function NewNotePage () {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
         className='max-w-md mx-auto flex flex-col gap-4'
+        onSubmit={form.handleSubmit(handleEditForm)}
       >
         <FormField
           control={form.control}
@@ -97,7 +111,9 @@ export default function NewNotePage () {
           )}
         />
         <div className='w-full'>
-          <Button className='block mx-auto invert' type='submit'>Crear</Button>
+          <Button className='block mx-auto invert' type='submit'>
+            Editar
+          </Button>
         </div>
       </form>
     </Form>
