@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Note } from '@/utils/types'
 
 const FormSchema = z.object({
@@ -34,24 +34,18 @@ const FormSchema = z.object({
 
 export default function EditNotePage () {
   const router = useRouter()
-  const [note, setNote] = useState<Note>({
-    title: '',
-    description: '',
-    id: ''
-  })
 
   const params = useParams()
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: note.title,
-      description: note.description
+      title: '',
+      description: ''
     }
   })
   useEffect(() => {
     const notes = JSON.parse(localStorage.getItem('notes') as string)
     const noteToEdit = notes.find((note: Note) => note.id === params.id)
-    setNote(noteToEdit)
     form.setValue('title', noteToEdit.title)
     form.setValue('description', noteToEdit.description)
   }, [])
@@ -60,16 +54,20 @@ export default function EditNotePage () {
     const { title, description } = data
 
     const newNote = {
-      id: note.id,
+      id: params.id,
       title,
       description
     }
 
     if (localStorage.getItem('notes')) {
       const notes = JSON.parse(localStorage.getItem('notes') as string)
-      const index = notes.findIndex((note: Note) => note.id === note.id)
-      notes[index] = newNote
-      localStorage.setItem('notes', JSON.stringify(notes))
+      const newNotes = notes.map((note: Note) => {
+        if (note.id === params.id) {
+          return newNote
+        }
+        return note
+      })
+      localStorage.setItem('notes', JSON.stringify(newNotes))
     } else {
       const notes = [newNote]
       localStorage.setItem('notes', JSON.stringify(notes))

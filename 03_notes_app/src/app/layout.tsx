@@ -26,6 +26,9 @@ export default function RootLayout ({
 }>) {
   return (
     <html lang='es' suppressHydrationWarning>
+      <head>
+        <link rel="shortcut icon" href="/notes.svg" type="image/svg+xml" />
+      </head>
       <body
         className={`${geistSans.className} ${geistMono.className} antialiased`}
       >
