@@ -43,7 +43,7 @@ export default function Home () {
     <>
       <main className='container mx-auto'>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 md:px-0'>
-          {notes.length > 0 &&
+          {notes?.length > 0 &&
             notes.map(note => (
               <Card
                 key={note.id}
@@ -92,7 +92,7 @@ export default function Home () {
               </Card>
             ))}
         </div>
-        {notes.length === 0 && (
+        {notes?.length === 0 && (
           <div className='text-center'>
             <p>No se ha creado ninguna nota aún.</p>
             <Link className='text-blue-500 underline' href='/new-note'>
