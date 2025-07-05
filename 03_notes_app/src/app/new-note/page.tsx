@@ -1,14 +1,14 @@
 'use client'
 
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 import { v4 as uuidV4 } from "uuid";
-import { useRouter } from 'next/navigation'
+import { z } from 'zod';
 
 
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
@@ -16,9 +16,9 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 const FormSchema = z.object({
   title: z
@@ -65,10 +65,10 @@ export default function NewNotePage () {
   }
 
   return (
-    <Form {...form}>
+    <Form {...form} >
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className='max-w-md mx-auto flex flex-col gap-4'
+        className='max-w-md mx-auto flex flex-col gap-4 p-4'
       >
         <FormField
           control={form.control}

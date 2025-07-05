@@ -1,10 +1,6 @@
 'use client'
 
-import { useParams, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
 import {
   Form,
   FormControl,
@@ -15,8 +11,12 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { useEffect } from 'react'
 import { Note } from '@/utils/types'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useParams, useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
 const FormSchema = z.object({
   title: z
@@ -79,7 +79,7 @@ export default function EditNotePage () {
   return (
     <Form {...form}>
       <form
-        className='max-w-md mx-auto flex flex-col gap-4'
+        className='max-w-md mx-auto flex flex-col gap-4 p-4'
         onSubmit={form.handleSubmit(handleEditForm)}
       >
         <FormField

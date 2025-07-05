@@ -1,8 +1,9 @@
+import { Footer } from '@/components/Footer'
+import { Navbar } from '@/components/Navbar'
+import { Providers } from '@/lib/providers'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { Navbar } from '@/components/Navbar'
-import { Providers } from '@/lib/providers'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,14 +28,15 @@ export default function RootLayout ({
   return (
     <html lang='es' suppressHydrationWarning>
       <head>
-        <link rel="shortcut icon" href="/notes.svg" type="image/svg+xml" />
+        <link rel='shortcut icon' href='/notes.svg' type='image/svg+xml' />
       </head>
       <body
-        className={`${geistSans.className} ${geistMono.className} antialiased`}
+        className={`${geistSans.className} ${geistMono.className} antialiased flex flex-col min-h-screen`}
       >
         <Providers>
           <Navbar />
-          {children}
+          <main className='flex-1'>{children}</main>
+          <Footer />
         </Providers>
       </body>
     </html>

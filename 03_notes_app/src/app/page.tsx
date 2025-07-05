@@ -1,6 +1,5 @@
 'use client'
-import { Note } from '@/utils/types'
-import { useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
@@ -8,7 +7,8 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import { Note } from '@/utils/types'
+import { useEffect, useState } from 'react'
 import { MdDeleteOutline, MdOutlineEdit } from 'react-icons/md'
 
 import {
@@ -43,7 +43,7 @@ export default function Home () {
   }
   return (
     <>
-      <main className='container mx-auto'>
+      <div className='container mx-auto'>
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 md:px-0'>
           {notes.length > 0 &&
             notes.map(note => (
@@ -102,7 +102,7 @@ export default function Home () {
             </Link>
           </div>
         )}
-      </main>
+      </div>
     </>
   )
 }
